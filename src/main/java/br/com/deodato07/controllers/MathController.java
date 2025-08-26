@@ -41,6 +41,16 @@ public class MathController {
         return convertToDouble(numberOne) - convertToDouble(numberTwo);
     }
 
+    //http://localhost:8080/math/multiplication/3/5
+    @RequestMapping("/multiplication/{numberOne}/{numberTwo}")
+    public Double multiplication(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
+
     //http://localhost:8080/math/division/3/5
     @RequestMapping("/division/{numberOne}/{numberTwo}")
     public Double division(
