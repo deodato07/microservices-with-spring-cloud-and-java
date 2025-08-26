@@ -32,6 +32,45 @@ public class MathController {
     }
 
     //http://localhost:8080/math/subtraction/3/5
-    //http://localhost:8080/math/devision/3/5
+    @RequestMapping("/subtraction/{numberOne}/{numberTwo}")
+    public Double subtraction(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
 
+    //http://localhost:8080/math/division/3/5
+    @RequestMapping("/division/{numberOne}/{numberTwo}")
+    public Double division(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedMathOperationException("Please set a numeric value!");
+        Double divisor = convertToDouble(numberTwo);
+        if (divisor == 0) throw new UnsupportedMathOperationException("Division by zero is not allowed!");
+        return convertToDouble(numberOne) / divisor;
+    }
+    //http://localhost:8080/math/mean/3/5
+    @RequestMapping("/mean/{numberOne}/{numberTwo}")
+    public Double mean(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedMathOperationException("Please set a numeric value!");
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+    }
+
+    //http://localhost:8080/math/squareRoot/3/5
+    @RequestMapping("/squareRoot/{numberOne}/{numberTwo}")
+    public String squareRoot(
+            @PathVariable("numberOne") String numberOne,
+            @PathVariable("numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedMathOperationException("Please set a numeric value!");
+        double sqrtOne = Math.sqrt(convertToDouble(numberOne));
+        double sqrtTwo = Math.sqrt(convertToDouble(numberTwo));
+        return "Raiz de " + numberOne + ": " + sqrtOne + ", Raiz de " + numberTwo + ": " + sqrtTwo;
+    }
 }
