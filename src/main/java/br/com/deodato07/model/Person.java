@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
@@ -29,5 +30,4 @@ public class Person implements Serializable {
 
     public Person() {
     }
-
 }
